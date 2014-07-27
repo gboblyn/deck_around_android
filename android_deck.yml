@@ -1,0 +1,35 @@
+# ~/.tmuxinator/android_deck.yml
+
+name: android_deck
+root: ~/code/android/deck_around_android
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - java_editor:
+      layout: main-vertical
+      panes:
+        - enw ./src/
+        - ant debug install
+  - xml_editor:
+      layout: even-horizontal
+      panes:
+        - enw ./res/layout/
+        - vim ./res/values/strings.xml
+  - consoles:
+      layout: even-vertical
+      panes:
+        - git pull
+        - # bash
+  - logs: adb logcat
+  - scratch: enw
